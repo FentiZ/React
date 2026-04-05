@@ -1,0 +1,188 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+}
+
+/* === LAYOUT === */
+.leftblock {
+  width: 60%;
+  float: left;
+  display: flex;
+  padding: 20px;
+}
+
+.rightblock {
+  width: 40%;
+  float: left;
+  padding: 20px;
+}
+
+/* === LEFT SIDE === */
+.minimenu {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.minimenu img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 5px;
+}
+
+.bigpicture {
+  flex: 1;
+  margin-left: 20px;
+  background: #fff;
+  height: 400px;
+  border: 1px solid #ddd;
+}
+
+/* === RIGHT SIDE === */
+.description {
+  background: #fff;
+  padding: 20px;
+}
+
+/* PATH */
+.passway p {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+/* TITLE */
+.ProductName h1 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.ProductName p {
+  color: #666;
+  font-size: 14px;
+}
+
+.feedbackbutton {
+  margin-top: 10px;
+  border: none;
+  background: none;
+  color: #888;
+  cursor: pointer;
+}
+
+/* === PRICE + BUY === */
+.costandbuyblock {
+  margin-top: 20px;
+}
+
+.cost {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.status {
+  color: green;
+  margin: 10px 0;
+}
+
+/* special buttons */
+.specialbuttonscontainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.specialbutton {
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+/* discount line */
+.costandbuyblock img {
+  vertical-align: middle;
+}
+
+.costandbuyblock p {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* amount */
+.ammount {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #ddd;
+  width: fit-content;
+  padding: 10px 20px;
+  margin-top: 15px;
+}
+
+.minus {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* buy buttons */
+.buy {
+  background: #ff2d2d;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  margin-top: 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.orderinone {
+  border: 1px solid #ddd;
+  padding: 15px;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* === GIFT === */
+.giftcontainer {
+  display: flex;
+  border: 1px solid #ddd;
+  margin-top: 25px;
+  padding: 15px;
+}
+
+.rightgift img {
+  width: 80px;
+}
+
+.leftgift {
+  margin-left: 15px;
+}
+
+.leftgift h2 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.giftdesc p {
+  font-size: 14px;
+}
+
+.giftaction {
+  text-decoration: line-through;
+  color: #999;
+}

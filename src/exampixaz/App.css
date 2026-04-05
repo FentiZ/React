@@ -1,0 +1,157 @@
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+.app {
+  background: #fff;
+  color: #000;
+}
+
+.app.dark {
+  background: #121212;
+  color: white;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  padding: 15px;
+  gap: 10px;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.search {
+  flex: 1;
+  padding: 8px;
+  border-radius: 20px;
+}
+
+/* PROFILE */
+.profile-header {
+  text-align: center;
+}
+
+/* GALLERY */
+.gallery {
+  column-count: 4;
+  column-gap: 10px;
+  padding: 10px;
+}
+
+.card {
+  break-inside: avoid;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+  background: rgba(0,0,0,0.4);
+}
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+/* LIKE */
+.like {
+  background: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.like.active {
+  background: red;
+  color: white;
+}
+
+/* USER */
+.user {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.user img {
+  width: 25px;
+  border-radius: 50%;
+}
+
+/* PAGINATION */
+.pagination {
+  text-align: center;
+  padding: 20px;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+}
+
+.modal-content img {
+  width: 100%;
+}
+
+.modal-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 500px) {
+  .gallery {
+    column-count: 1;
+  }
+}
