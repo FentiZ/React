@@ -7,9 +7,13 @@
 
 body {
   background: #f5f5f5;
+  color: #222;
 }
 
-/* === LAYOUT === */
+img {
+  display: block;
+}
+
 .leftblock {
   width: 60%;
   float: left;
@@ -23,7 +27,6 @@ body {
   padding: 20px;
 }
 
-/* === LEFT SIDE === */
 .minimenu {
   width: 80px;
   display: flex;
@@ -44,27 +47,32 @@ body {
   flex: 1;
   margin-left: 20px;
   background: #fff;
-  height: 400px;
+  height: 420px;
   border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* === RIGHT SIDE === */
+.bigpicture img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
 .description {
   background: #fff;
   padding: 20px;
 }
 
-/* PATH */
 .passway p {
   color: #999;
   font-size: 14px;
-  line-height: 1.4;
   margin-bottom: 15px;
 }
 
-/* TITLE */
 .ProductName h1 {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 10px;
 }
@@ -75,14 +83,13 @@ body {
 }
 
 .feedbackbutton {
-  margin-top: 10px;
+  margin-top: 5px;
   border: none;
   background: none;
   color: #888;
   cursor: pointer;
 }
 
-/* === PRICE + BUY === */
 .costandbuyblock {
   margin-top: 20px;
 }
@@ -93,44 +100,59 @@ body {
   margin-bottom: 10px;
 }
 
+.specialbuttonscontainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.specialbuttonscontainer img {
+  width: 16px;
+  height: 16px;
+}
+
+.specialbutton {
+  font-size: 14px;
+  color: #777;
+  margin-right: 10px;
+}
+
 .status {
   color: green;
   margin: 10px 0;
 }
 
-/* special buttons */
-.specialbuttonscontainer {
+.discount {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.specialbutton {
+  gap: 8px;
   font-size: 14px;
   color: #666;
+}
+
+.discount img {
+  width: 18px;
+}
+
+.login {
+  color: #ff2d2d;
   cursor: pointer;
 }
 
-/* discount line */
-.costandbuyblock img {
-  vertical-align: middle;
+.buyrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-.costandbuyblock p {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-/* amount */
 .ammount {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   border: 1px solid #ddd;
-  width: fit-content;
-  padding: 10px 20px;
-  margin-top: 15px;
+  padding: 10px 15px;
 }
 
 .minus {
@@ -138,35 +160,32 @@ body {
   font-size: 18px;
 }
 
-/* buy buttons */
 .buy {
   background: #ff2d2d;
   color: #fff;
-  padding: 15px;
-  text-align: center;
-  margin-top: 15px;
+  padding: 12px 25px;
   cursor: pointer;
   font-weight: bold;
+  border-radius: 4px;
 }
 
 .orderinone {
   border: 1px solid #ddd;
-  padding: 15px;
-  text-align: center;
-  margin-top: 10px;
+  padding: 12px 20px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-/* === GIFT === */
 .giftcontainer {
   display: flex;
   border: 1px solid #ddd;
   margin-top: 25px;
   padding: 15px;
+  align-items: center;
 }
 
 .rightgift img {
-  width: 80px;
+  width: 60px;
 }
 
 .leftgift {
@@ -174,15 +193,17 @@ body {
 }
 
 .leftgift h2 {
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 5px;
 }
 
-.giftdesc p {
+.giftdesc {
   font-size: 14px;
+  color: #555;
 }
 
 .giftaction {
   text-decoration: line-through;
   color: #999;
+  margin-right: 10px;
 }
