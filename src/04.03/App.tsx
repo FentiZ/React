@@ -1,5 +1,5 @@
-import './App3.css'
-import ipadImg from './assets/project3/ipad.jpg' // положи сюда картинку
+import './App.css'
+import ipadImg from './assets/ipad.jpg'
 
 type ProductProps = {
   title: string

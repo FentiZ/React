@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
-const API_KEY = "54972016-5ebbf7ccedaa01bcdc38308ac";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import Gallery from "./components/Gallery";
+import Modal from "./components/Modal";
 
-type ImageType = {
+export type ImageType = {
   id: number;
   webformatURL: string;
   largeImageURL: string;
@@ -13,6 +16,14 @@ type ImageType = {
   views: number;
 };
 
+export type SortType =
+  | "likes_desc"
+  | "likes_asc"
+  | "views_desc"
+  | "views_asc";
+
+const API_KEY = "54972016-5ebbf7ccedaa01bcdc38308ac";
+
 export default function App() {
   const [images, setImages] = useState<ImageType[]>([]);
   const [page, setPage] = useState(1);
@@ -20,13 +31,12 @@ export default function App() {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
   const [dark, setDark] = useState(false);
+  const [sort, setSort] = useState<SortType>("likes_desc");
 
-  // лайки пользователя
   const [liked, setLiked] = useState<number[]>(
     JSON.parse(localStorage.getItem("likes") || "[]")
   );
 
-  // локальные просмотры
   const [localViews, setLocalViews] = useState<{ [key: number]: number }>(
     JSON.parse(localStorage.getItem("localViews") || "{}")
   );
@@ -44,12 +54,10 @@ export default function App() {
   };
 
   const toggleLike = (id: number) => {
-    let updated;
-    if (liked.includes(id)) {
-      updated = liked.filter((i) => i !== id);
-    } else {
-      updated = [...liked, id];
-    }
+    const updated = liked.includes(id)
+      ? liked.filter((i) => i !== id)
+      : [...liked, id];
+
     setLiked(updated);
     localStorage.setItem("likes", JSON.stringify(updated));
   };
@@ -72,141 +80,72 @@ export default function App() {
     return acc;
   }, {});
 
-  const currentImages = selectedUser
+  const baseImages = selectedUser
     ? grouped[selectedUser] || []
     : images;
 
+  const sortedImages = [...baseImages].sort((a, b) => {
+    const likesA = a.likes + (liked.includes(a.id) ? 1 : 0);
+    const likesB = b.likes + (liked.includes(b.id) ? 1 : 0);
+
+    const viewsA = a.views + (localViews[a.id] || 0);
+    const viewsB = b.views + (localViews[b.id] || 0);
+
+    switch (sort) {
+      case "likes_desc":
+        return likesB - likesA;
+      case "likes_asc":
+        return likesA - likesB;
+      case "views_desc":
+        return viewsB - viewsA;
+      case "views_asc":
+        return viewsA - viewsB;
+      default:
+        return 0;
+    }
+  });
+
   return (
     <div className={dark ? "app dark" : "app"}>
-      
-      {/* NAVBAR */}
-      <header className="navbar">
-        <div
-          className="logo"
-          onClick={() => {
-            setSelectedUser(null);
-            setPage(1);
-          }}
-        >
-          PixClone
-        </div>
+      <Navbar
+        search={search}
+        setSearch={setSearch}
+        setSelectedUser={setSelectedUser}
+        setPage={setPage}
+        dark={dark}
+        setDark={setDark}
+      />
 
-        <input
-          className="search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search..."
-        />
-
-        <button onClick={() => setDark(!dark)}>
-          {dark ? "☀️" : "🌙"}
-        </button>
-      </header>
-
-      {/* PROFILE */}
       {selectedUser && (
         <div className="profile-header">
           <h2>{selectedUser}</h2>
-          <p>{currentImages.length} photos</p>
+          <p>{baseImages.length} photos</p>
         </div>
       )}
 
-      {/* GALLERY */}
-      <div className="gallery">
-        {currentImages.map((img) => (
-          <div
-            key={img.id}
-            className="card"
-            onClick={() => openImage(img)}
-          >
-            <img src={img.webformatURL} />
+      <div className="layout">
+        <Sidebar sort={sort} setSort={setSort} />
 
-            <div className="overlay">
-              <div className="top">
-                <button
-                  className={liked.includes(img.id) ? "like active" : "like"}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleLike(img.id);
-                  }}
-                >
-                  ❤️ {img.likes + (liked.includes(img.id) ? 1 : 0)}
-                </button>
-              </div>
-
-              <div className="bottom">
-                <span>
-                  👁 {img.views + (localViews[img.id] || 0)}
-                </span>
-
-                {!selectedUser && (
-                  <div
-                    className="user"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedUser(img.user);
-                    }}
-                  >
-                    <img src={img.userImageURL} />
-                    <span>{img.user}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
+        <Gallery
+          images={sortedImages}
+          openImage={openImage}
+          liked={liked}
+          toggleLike={toggleLike}
+          localViews={localViews}
+          setSelectedUser={setSelectedUser}
+          selectedUser={selectedUser}
+        />
       </div>
 
-      {/* PAGINATION */}
-      {!selectedUser && (
-        <div className="pagination">
-          <button onClick={() => setPage((p) => Math.max(p - 1, 1))}>
-            Prev
-          </button>
-          <span>{page}</span>
-          <button onClick={() => setPage((p) => p + 1)}>
-            Next
-          </button>
-        </div>
-      )}
-
-      {/* MODAL */}
       {selectedImage && (
-        <div className="modal" onClick={() => setSelectedImage(null)}>
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img src={selectedImage.largeImageURL} />
-
-            <div className="modal-info">
-              <div
-                className="user"
-                onClick={() => {
-                  setSelectedUser(selectedImage.user);
-                  setSelectedImage(null);
-                }}
-              >
-                <span>{selectedImage.user}</span>
-              </div>
-
-              <button
-                className={
-                  liked.includes(selectedImage.id)
-                    ? "like active"
-                    : "like"
-                }
-                onClick={() => toggleLike(selectedImage.id)}
-              >
-                ❤️ {selectedImage.likes + (liked.includes(selectedImage.id) ? 1 : 0)}
-              </button>
-
-              <span>
-                👁 {selectedImage.views + (localViews[selectedImage.id] || 0)}
-              </span>
-            </div>
-          </div>
-        </div>
+        <Modal
+          image={selectedImage}
+          onClose={() => setSelectedImage(null)}
+          liked={liked}
+          toggleLike={toggleLike}
+          localViews={localViews}
+          setSelectedUser={setSelectedUser}
+        />
       )}
     </div>
   );

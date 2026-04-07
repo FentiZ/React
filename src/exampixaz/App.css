@@ -90,6 +90,7 @@ body {
   border: none;
   padding: 5px 10px;
   border-radius: 20px;
+  color: black;
 }
 
 .like.active {
@@ -128,6 +129,7 @@ body {
 
 .modal-content {
   background: white;
+  color: black;
   padding: 10px;
   border-radius: 10px;
   max-width: 80%;
@@ -138,6 +140,7 @@ body {
 }
 
 .modal-info {
+  color: black;
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
@@ -154,4 +157,26 @@ body {
   .gallery {
     column-count: 1;
   }
+}
+
+/* COMPONENTS */
+
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  padding: 15px;
+  border-right: 1px solid #ccc;
+}
+
+.sidebar button {
+  display: block;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.gallery {
+  flex: 1;
 }
