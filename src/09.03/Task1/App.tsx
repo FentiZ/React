@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App4.css";
+import "./App.css";
 
 type Post = {
   id: number;
