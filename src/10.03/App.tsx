@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App5.css";
+import "./App.css";
 
 interface ImageData {
   id: number;
